@@ -56,6 +56,7 @@ public class GuestBookController {
 	}
 	
 	//삭제
+	//파라미터로 받기
 	@RequestMapping(value="/delete", method= {RequestMethod.GET, RequestMethod.POST}) 
 	public String delete(@RequestParam("no") int no,
 						 @RequestParam("password") String password) {
