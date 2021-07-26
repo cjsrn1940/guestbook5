@@ -3,9 +3,15 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="guestbook">
 
+	<resultMap id="resultMapGuestVo" type="com.javaex.vo.GuestbookVo">
+		<result column="no" property="no"/>
+		<result column="name" property="name"/>
+		<result column="password" property="password"/>
+		<result column="content" property="content"/>
+	</resultMap>
 
 	<!-- list -->
-	<select id="guestList" resultType="com.javaex.vo.GuestbookVo"> <!-- 내보내는 타입은 resultType로 표현 -->
+	<select id="guestList" resultType="GuestVo"> <!-- 내보내는 타입은 resultType로 표현 -->
 		<![CDATA[
 			select  no,
 			        name,
@@ -17,7 +23,7 @@
 	</select>
 	
 	<!-- add -->
-	<insert id="guestInsert" parameterType="com.javaex.vo.GuestbookVo"> <!-- 내보내는 타입은 parameterType로 표현 -->
+	<insert id="guestInsert" parameterType="GuestVo"> <!-- 내보내는 타입은 parameterType로 표현 -->
 		<![CDATA[
 			insert into guestbook
 			values(
@@ -29,5 +35,23 @@
 			)
 		]]>
 	</insert>
+	
+	<!-- delete -->
+	<delete id="guestDelete" parameterType="map">
+		<![CDATA[
+			delete from guestbook
+			where no = #{no}
+			and password = #{password}
+		]]>
+	</delete>
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	
 </mapper>

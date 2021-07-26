@@ -29,7 +29,7 @@ public class GuestBookController {
 		model.addAttribute("gList", guestList);
 	    
 		//view
-	    return "/WEB-INF/addList.jsp";
+	    return "addList";
 	}	
 	
 	//등록
@@ -43,6 +43,26 @@ public class GuestBookController {
 		GuestbookVo guestVo = new GuestbookVo(name, password, content);
 		
 		guestDao.guestInsert(guestVo);
+		
+		return "redirect:/addList";
+	}
+	
+	//삭제폼
+	@RequestMapping(value="/deleteForm", method= {RequestMethod.GET, RequestMethod.POST}) 
+	public String deleteForm() {
+		System.out.println("[GuestBookController.deleteForm]");
+		
+	    return "deleteForm";
+	}
+	
+	//삭제
+	@RequestMapping(value="/delete", method= {RequestMethod.GET, RequestMethod.POST}) 
+	public String delete(@RequestParam("no") int no,
+						 @RequestParam("password") String password) {
+		System.out.println("[GuestBookController.delete]");
+		
+		//GuestbookDao guestDao = new GuestbookDao();
+		guestDao.guestDelete(no, password);
 		
 		return "redirect:/addList";
 	}
